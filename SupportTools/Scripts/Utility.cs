@@ -91,7 +91,7 @@ namespace SupportTools
             string path = @"E:\a\b.xml";
             if (isOpen)
             {
-                if (File.Exists(path))
+                if (!File.Exists(path))
                 {
                     GlobalData.config = new ConfigData();
                     var d = new FileInfo(path);
