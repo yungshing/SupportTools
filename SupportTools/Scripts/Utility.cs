@@ -88,7 +88,7 @@ namespace SupportTools
         }
         public static void CreateOrOpenConfig(bool isOpen = true)
         {
-            string path = @"E:\a\b.xml";
+            string path =Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.LocalApplicationData),"ZZFZ\\config.xml");
             if (isOpen)
             {
                 if (!File.Exists(path))
