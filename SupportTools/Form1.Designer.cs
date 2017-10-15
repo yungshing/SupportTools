@@ -102,6 +102,19 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.p2con_tbx = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.p2sel_btn = new System.Windows.Forms.Button();
+            this.p2ftp_lab = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.ftp_cbx = new System.Windows.Forms.CheckBox();
+            this.p2base_cbx = new System.Windows.Forms.CheckBox();
+            this.p2other_cbx = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.p2changeselall_cbx = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -115,6 +128,9 @@
             this.tabPage5.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // root_tbx
@@ -182,6 +198,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
@@ -835,6 +852,142 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.richTextBox1);
+            this.tabPage6.Controls.Add(this.groupBox5);
+            this.tabPage6.Controls.Add(this.p2other_cbx);
+            this.tabPage6.Controls.Add(this.p2base_cbx);
+            this.tabPage6.Controls.Add(this.ftp_cbx);
+            this.tabPage6.Controls.Add(this.textBox3);
+            this.tabPage6.Controls.Add(this.p2ftp_lab);
+            this.tabPage6.Controls.Add(this.p2sel_btn);
+            this.tabPage6.Controls.Add(this.label17);
+            this.tabPage6.Controls.Add(this.p2con_tbx);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(640, 418);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "新增";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // p2con_tbx
+            // 
+            this.p2con_tbx.Location = new System.Drawing.Point(67, 5);
+            this.p2con_tbx.Name = "p2con_tbx";
+            this.p2con_tbx.Size = new System.Drawing.Size(494, 21);
+            this.p2con_tbx.TabIndex = 0;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(8, 9);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(53, 12);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "配置文件";
+            // 
+            // p2sel_btn
+            // 
+            this.p2sel_btn.Location = new System.Drawing.Point(565, 4);
+            this.p2sel_btn.Name = "p2sel_btn";
+            this.p2sel_btn.Size = new System.Drawing.Size(63, 23);
+            this.p2sel_btn.TabIndex = 2;
+            this.p2sel_btn.Text = "选择";
+            this.p2sel_btn.UseVisualStyleBackColor = true;
+            // 
+            // p2ftp_lab
+            // 
+            this.p2ftp_lab.AutoSize = true;
+            this.p2ftp_lab.Location = new System.Drawing.Point(10, 48);
+            this.p2ftp_lab.Name = "p2ftp_lab";
+            this.p2ftp_lab.Size = new System.Drawing.Size(35, 12);
+            this.p2ftp_lab.TabIndex = 3;
+            this.p2ftp_lab.Text = "FTPIP";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(67, 45);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(494, 21);
+            this.textBox3.TabIndex = 4;
+            // 
+            // ftp_cbx
+            // 
+            this.ftp_cbx.AutoSize = true;
+            this.ftp_cbx.Location = new System.Drawing.Point(67, 81);
+            this.ftp_cbx.Name = "ftp_cbx";
+            this.ftp_cbx.Size = new System.Drawing.Size(54, 16);
+            this.ftp_cbx.TabIndex = 5;
+            this.ftp_cbx.Text = "FTPIP";
+            this.ftp_cbx.UseVisualStyleBackColor = true;
+            // 
+            // p2base_cbx
+            // 
+            this.p2base_cbx.AutoSize = true;
+            this.p2base_cbx.Location = new System.Drawing.Point(127, 81);
+            this.p2base_cbx.Name = "p2base_cbx";
+            this.p2base_cbx.Size = new System.Drawing.Size(48, 16);
+            this.p2base_cbx.TabIndex = 6;
+            this.p2base_cbx.Text = "Base";
+            this.p2base_cbx.UseVisualStyleBackColor = true;
+            // 
+            // p2other_cbx
+            // 
+            this.p2other_cbx.AutoSize = true;
+            this.p2other_cbx.Location = new System.Drawing.Point(178, 81);
+            this.p2other_cbx.Name = "p2other_cbx";
+            this.p2other_cbx.Size = new System.Drawing.Size(54, 16);
+            this.p2other_cbx.TabIndex = 8;
+            this.p2other_cbx.Text = "Other";
+            this.p2other_cbx.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.p2changeselall_cbx, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 15);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(198, 297);
+            this.tableLayoutPanel1.TabIndex = 9;
+            // 
+            // p2changeselall_cbx
+            // 
+            this.p2changeselall_cbx.AutoSize = true;
+            this.p2changeselall_cbx.Location = new System.Drawing.Point(3, 3);
+            this.p2changeselall_cbx.Name = "p2changeselall_cbx";
+            this.p2changeselall_cbx.Size = new System.Drawing.Size(48, 16);
+            this.p2changeselall_cbx.TabIndex = 0;
+            this.p2changeselall_cbx.Text = "全选";
+            this.p2changeselall_cbx.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox5.Location = new System.Drawing.Point(7, 103);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 312);
+            this.groupBox5.TabIndex = 10;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Change";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(213, 110);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(424, 305);
+            this.richTextBox1.TabIndex = 11;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -869,6 +1022,11 @@
             this.tabPage3.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -948,6 +1106,19 @@
         private System.Windows.Forms.CheckBox lock_cb;
         private System.Windows.Forms.Button p1add_btn;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.CheckBox p2changeselall_cbx;
+        private System.Windows.Forms.CheckBox p2other_cbx;
+        private System.Windows.Forms.CheckBox p2base_cbx;
+        private System.Windows.Forms.CheckBox ftp_cbx;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label p2ftp_lab;
+        private System.Windows.Forms.Button p2sel_btn;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox p2con_tbx;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
