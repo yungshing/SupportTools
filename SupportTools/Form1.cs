@@ -24,6 +24,7 @@ namespace SupportTools
             Create();
             Add();
             Code();
+            Other();
         }
         /// <summary>
         /// 加载配置文件
@@ -105,6 +106,23 @@ namespace SupportTools
             follow.code_confirm_btn = code_confirm_btn;
 
             follow.code_sel_cbx = code_sel_cbx;
+
+            follow.OnLoad();
+        }
+        /// <summary>
+        /// tabControl 
+        /// page5 其它
+        /// </summary>
+        void Other()
+        {
+            OtherFollow follow = new OtherFollow();
+            follow.o_filepath_tbx = o_filepath_tbx;
+            follow.o_showhash_tbx = o_showhash_tbx;
+            follow.o_xmlpath_tbx = o_xmlpath_tbx;
+
+            follow.o_checkhash_btn = o_checkhash_btn;
+            follow.o_clear_btn = o_clear_btn;
+            follow.o_xmlpath_tbx = o_xmlpath_tbx;
 
             follow.OnLoad();
         }

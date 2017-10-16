@@ -107,9 +107,13 @@
             this.code_source_tbx = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.hash_show_tbx = new System.Windows.Forms.TextBox();
-            this.hash_file_tbx = new System.Windows.Forms.TextBox();
+            this.o_scan_btn = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.o_clear_btn = new System.Windows.Forms.Button();
+            this.o_xmlpath_tbx = new System.Windows.Forms.TextBox();
+            this.o_checkhash_btn = new System.Windows.Forms.Button();
+            this.o_showhash_tbx = new System.Windows.Forms.TextBox();
+            this.o_filepath_tbx = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -909,38 +913,81 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.button1);
-            this.tabPage5.Controls.Add(this.hash_show_tbx);
-            this.tabPage5.Controls.Add(this.hash_file_tbx);
+            this.tabPage5.Controls.Add(this.o_scan_btn);
+            this.tabPage5.Controls.Add(this.label7);
+            this.tabPage5.Controls.Add(this.o_clear_btn);
+            this.tabPage5.Controls.Add(this.o_xmlpath_tbx);
+            this.tabPage5.Controls.Add(this.o_checkhash_btn);
+            this.tabPage5.Controls.Add(this.o_showhash_tbx);
+            this.tabPage5.Controls.Add(this.o_filepath_tbx);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(640, 418);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Hash值";
+            this.tabPage5.Text = "其它";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // o_scan_btn
             // 
-            this.button1.Location = new System.Drawing.Point(195, 142);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "查看";
-            this.button1.UseVisualStyleBackColor = true;
+            this.o_scan_btn.Location = new System.Drawing.Point(549, 105);
+            this.o_scan_btn.Name = "o_scan_btn";
+            this.o_scan_btn.Size = new System.Drawing.Size(75, 23);
+            this.o_scan_btn.TabIndex = 6;
+            this.o_scan_btn.Text = "浏览";
+            this.o_scan_btn.UseVisualStyleBackColor = true;
             // 
-            // hash_show_tbx
+            // label7
             // 
-            this.hash_show_tbx.Location = new System.Drawing.Point(54, 80);
-            this.hash_show_tbx.Name = "hash_show_tbx";
-            this.hash_show_tbx.Size = new System.Drawing.Size(404, 21);
-            this.hash_show_tbx.TabIndex = 1;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 77);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(155, 12);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "删除xml文件中的iframe节点";
             // 
-            // hash_file_tbx
+            // o_clear_btn
             // 
-            this.hash_file_tbx.Location = new System.Drawing.Point(54, 38);
-            this.hash_file_tbx.Name = "hash_file_tbx";
-            this.hash_file_tbx.Size = new System.Drawing.Size(404, 21);
-            this.hash_file_tbx.TabIndex = 0;
+            this.o_clear_btn.Location = new System.Drawing.Point(170, 72);
+            this.o_clear_btn.Name = "o_clear_btn";
+            this.o_clear_btn.Size = new System.Drawing.Size(75, 23);
+            this.o_clear_btn.TabIndex = 4;
+            this.o_clear_btn.Text = "清除";
+            this.o_clear_btn.UseVisualStyleBackColor = true;
+            // 
+            // o_xmlpath_tbx
+            // 
+            this.o_xmlpath_tbx.AllowDrop = true;
+            this.o_xmlpath_tbx.Location = new System.Drawing.Point(8, 107);
+            this.o_xmlpath_tbx.Name = "o_xmlpath_tbx";
+            this.o_xmlpath_tbx.ReadOnly = true;
+            this.o_xmlpath_tbx.Size = new System.Drawing.Size(534, 21);
+            this.o_xmlpath_tbx.TabIndex = 3;
+            // 
+            // o_checkhash_btn
+            // 
+            this.o_checkhash_btn.Location = new System.Drawing.Point(548, 12);
+            this.o_checkhash_btn.Name = "o_checkhash_btn";
+            this.o_checkhash_btn.Size = new System.Drawing.Size(75, 23);
+            this.o_checkhash_btn.TabIndex = 2;
+            this.o_checkhash_btn.Text = "查看Hash值";
+            this.o_checkhash_btn.UseVisualStyleBackColor = true;
+            // 
+            // o_showhash_tbx
+            // 
+            this.o_showhash_tbx.Location = new System.Drawing.Point(8, 39);
+            this.o_showhash_tbx.Name = "o_showhash_tbx";
+            this.o_showhash_tbx.ReadOnly = true;
+            this.o_showhash_tbx.Size = new System.Drawing.Size(534, 21);
+            this.o_showhash_tbx.TabIndex = 1;
+            // 
+            // o_filepath_tbx
+            // 
+            this.o_filepath_tbx.AllowDrop = true;
+            this.o_filepath_tbx.Location = new System.Drawing.Point(8, 12);
+            this.o_filepath_tbx.Name = "o_filepath_tbx";
+            this.o_filepath_tbx.ReadOnly = true;
+            this.o_filepath_tbx.Size = new System.Drawing.Size(534, 21);
+            this.o_filepath_tbx.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -1056,9 +1103,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button code_defaultdes_btn;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox hash_show_tbx;
-        private System.Windows.Forms.TextBox hash_file_tbx;
+        private System.Windows.Forms.Button o_checkhash_btn;
+        private System.Windows.Forms.TextBox o_showhash_tbx;
+        private System.Windows.Forms.TextBox o_filepath_tbx;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RichTextBox killname_rt;
         private System.Windows.Forms.Label label15;
@@ -1090,6 +1137,10 @@
         private System.Windows.Forms.RichTextBox p2infor_rtb;
         private System.Windows.Forms.Button p2start_btn;
         private System.Windows.Forms.CheckBox p2backup_cbx;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button o_clear_btn;
+        private System.Windows.Forms.TextBox o_xmlpath_tbx;
+        private System.Windows.Forms.Button o_scan_btn;
     }
 }
 

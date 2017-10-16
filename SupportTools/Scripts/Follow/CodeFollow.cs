@@ -271,8 +271,8 @@ namespace SupportTools.Follow
             Null=0,
             DESEN,
             DESDE,
-            SIMPLEDE,
             SIMPLEEN,
+            SIMPLEDE,
         }
     }
 }

@@ -65,6 +65,7 @@
     <Compile Include="Scripts\Follow\BaseFollow.cs" />
     <Compile Include="Scripts\Follow\CodeFollow.cs" />
     <Compile Include="Scripts\Follow\MadeConfigFollow.cs" />
+    <Compile Include="Scripts\Follow\OtherFollow.cs" />
     <Compile Include="Scripts\GlobalData.cs" />
     <Compile Include="Scripts\Test.cs" />
     <Compile Include="Scripts\Utility.cs" />
