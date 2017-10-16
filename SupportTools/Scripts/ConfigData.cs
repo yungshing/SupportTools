@@ -12,16 +12,22 @@ namespace SupportTools
     {
         public ConfigData()
         {
-            p1_Config = new SupportTools.P1_Config();
+            config_Create = new Config_Create();
+            config_Add = new Config_Add();
+            config_Code = new Config_Code();
         }
-        [XmlElement("P1_Config")]
-        public P1_Config p1_Config;
+        [XmlElement("Config_Create")]
+        public Config_Create config_Create;
+        [XmlElement("Config_Add")]
+        public Config_Add config_Add;
+        [XmlElement("Config_Code")]
+        public Config_Code config_Code;
     }
     /// <summary>
     /// 配置文件界面的配置文件
     /// </summary>
-    [XmlRoot(ElementName = "P1_Config")]
-    public class P1_Config
+    [XmlRoot(ElementName = "Config_Create")]
+    public class Config_Create
     {
         [XmlArray("FTPAddress")]
         [XmlArrayItem("f")]
@@ -42,5 +48,29 @@ namespace SupportTools
         [XmlArrayItem("k")]
         public string[] Kills = new string[] { "UI2.0.exe", "DrivingSchool.exe", "RuiHang-2.0.exe" };
 
+    }
+    /// <summary>
+    /// 新增  界面的配置文件 
+    /// </summary>
+    [XmlRoot(ElementName = "Config_Add")]
+    public class Config_Add
+    {
+        [XmlElement("ConfigPath")]
+        public string configPath = @"E:\FTPDownload\WenDingVersion-C\Config\Version-C.config";
+        [XmlElement("Backup")]
+        public bool backup = true;
+    }
+    /// <summary>
+    /// 加密  解密
+    /// </summary>
+    [XmlRoot(ElementName = "Config_Code")]
+    public class Config_Code
+    {
+        [XmlElement("DESKey")]
+        public string desKey = "ЁЃ؁ࠆ";
+        [XmlElement("DESVI")]
+        public string desVI= "܊Č̄ଂ";
+        [XmlElement("CharKey")]
+        public string charKey = "z";
     }
 }

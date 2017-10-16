@@ -5,8 +5,14 @@ using System.Text;
 
 namespace SupportTools.Follow
 {
-   public class BaseFollow
+   public abstract class BaseFollow
     {
-        public virtual void Dispose() { }
+        public abstract void Dispose();
+
+        public abstract void OnLoad();
+
+        public abstract void LoadConfig();
+
+        public abstract void SaveConfig();
     }
 }

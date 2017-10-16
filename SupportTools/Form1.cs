@@ -21,16 +21,23 @@ namespace SupportTools
 
         void InitializeFollow()
         {
-            P1Follow();
+            Create();
+            Add();
+            Code();
         }
         /// <summary>
         /// 加载配置文件
         /// </summary>
         void LoadConfig()
         {
-            Utility.CreateOrOpenConfig();
+            Utility.SaveOrOpenConfig(true);
         }
-        void P1Follow()
+
+        /// <summary>
+        /// tabControl 
+        /// page1 配置文件
+        /// </summary>
+        void Create()
         {
             var f = new Follow.MadeConfigFollow();
 
@@ -56,6 +63,50 @@ namespace SupportTools
             f.lock_cb = lock_cb;
 
             f.OnLoad();
+        }
+        /// <summary>
+        /// tabControl 
+        /// page2 新增
+        /// </summary>
+        void Add()
+        {
+            var follow = new AddFollow();
+            follow.p2con_tbx = p2con_tbx;
+            follow.p2ftpadd_tbx = p2ftpadd_tbx;
+
+            follow.p2sel_btn = p2sel_btn;
+            follow.p2start_btn = p2start_btn;
+
+            follow.ftp_cbx = ftp_cbx;
+            follow.p2base_cbx = p2base_cbx;
+            follow.p2other_cbx = p2other_cbx;
+            follow.p2backup_cbx = p2backup_cbx;
+
+            follow.p2change_tlp = p2change_tlp;
+            follow.p2infor_rtb = p2infor_rtb;
+
+            follow.OnLoad();
+        }
+        /// <summary>
+        /// tabControl 
+        /// page4 解密 加密
+        /// </summary>
+        void Code()
+        {
+            CodeFollow follow = new CodeFollow();
+
+            follow.code_source_tbx = code_source_tbx;
+            follow.code_deskey_tbx = code_deskey_tbx;
+            follow.code_desVI_tbx = code_desVI_tbx;
+            follow.code_charKey_tbx = code_charKey_tbx;
+
+            follow.code_scan_btn = code_scan_btn;
+            follow.code_defaultdes_btn = code_defaultdes_btn;
+            follow.code_confirm_btn = code_confirm_btn;
+
+            follow.code_sel_cbx = code_sel_cbx;
+
+            follow.OnLoad();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -37,6 +38,7 @@ namespace SupportTools
             }
             return md5;
         }
+
         /// <summary>
         /// 序列化保存xml
         /// </summary>
@@ -86,7 +88,7 @@ namespace SupportTools
             p.StartInfo.Arguments = @"/select," + filePath;
             p.Start();
         }
-        public static void CreateOrOpenConfig(bool isOpen = true)
+        public static void SaveOrOpenConfig(bool isOpen = true)
         {
             string path =Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.LocalApplicationData),"ZZFZ\\config.xml");
             if (isOpen)
@@ -117,6 +119,48 @@ namespace SupportTools
             }
         }
 
+        /// <summary>
+        /// 解密
+        /// </summary>
+        /// <param name="path"></param>
+        static public XmlDocument Decode(string path, char deKey = 'z')
+        {
+            XmlDocument xml = new XmlDocument();
+            string s1 = "";
+            using (var sr = new StreamReader(path))
+            {
+                s1 = sr.ReadToEnd();
+            }
+            var b1 = s1.ToCharArray();
+            for (int i = 0; i < b1.Length; i++)
+            {
+                b1[i] -= deKey;
+            }
+            s1 = new string(b1);
+            xml.LoadXml(s1);
+            return xml;
+        }
+        public static T Decode<T>(string path,char deKey = 'z')
+        {
+            string s = "";
+            using (var sr = new StreamReader(path, Encoding.UTF8))
+            {
+                s = sr.ReadToEnd();
+            }
+            var c = s.ToCharArray();
+            for (int i = 0; i < c.Length; i++)
+            {
+                c[i] -= deKey;
+            }
+            s = new string(c);
+            T t = default(T);
+            var xmlser = new XmlSerializer(typeof(T));
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(s)))
+            {
+                t = (T)xmlser.Deserialize(ms);
+            }
+            return t;
+        }
         public static void Encryption<T>(T t, string path)
         {
             var xml = ClassToXML(t);
@@ -184,6 +228,47 @@ namespace SupportTools
                     sw.Write(c);
                 }
             }
+        }
+
+        /// <summary>
+        /// 解密Data配置文件，非下载的配置文件
+        /// </summary>
+        /// <returns></returns>
+        public static XmlDocument DESDecode(string path, byte[] key = default(byte[]), byte[] iv = default(byte[]))
+        {
+            XmlDocument xml = new XmlDocument();
+            if (key == default(byte[]))
+            {
+                key = new byte[8] { 0x01, 0x04, 0x03, 0x04, 0x01, 0x06, 0x06, 0x08 };
+            }
+            if (iv == default(byte[]))
+            {
+                iv = new byte[8] { 0x0a, 0x07, 0x0c, 0x01, 0x04, 0x03, 0x02, 0x0b };
+            }
+            using (var fs = new FileStream(path, FileMode.Open))
+            {
+                using (var des = new DESCryptoServiceProvider { Key = key, IV = iv })
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        using (var cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write))
+                        {
+                            int n = 1;
+                            var buff = new byte[1024];
+                            while (n > 0)
+                            {
+                                n = fs.Read(buff, 0, buff.Length);
+                                cs.Write(buff, 0, n);
+                            }
+                            cs.FlushFinalBlock();
+
+                            ms.Position = 0;
+                            xml.Load(ms);
+                        }
+                    }
+                }
+            }
+            return xml;
         }
     }
 }

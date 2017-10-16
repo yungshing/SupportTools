@@ -86,7 +86,7 @@ namespace SupportTools.Follow
         /// <summary>
         /// 执行一次，不能多次调用 
         /// </summary>
-        public void OnLoad()
+        public override void OnLoad()
         {
             if (isOnLoad)
             {
@@ -100,7 +100,7 @@ namespace SupportTools.Follow
             OnClickSelectProgramBtn();
             OnClickSelectRootDirectory();
             OnClickStart();
-            SetTextBoxValue();
+            LoadConfig();
             SetDoShowCheckInfo(DoShowCheckInfo);
         }
         /// <summary>
@@ -112,15 +112,14 @@ namespace SupportTools.Follow
             star_btn.Click += (z, d) =>
             {
                 if (isChecking) return;
-                GetTextBoxValue();
                 if (!Ready())
                 {
                     return;
                 }
-                Utility.CreateOrOpenConfig(false);
+                SaveConfig();
                 Thread t = new Thread(()=>
                 {
-                    Check(versionXML, GlobalData.config.p1_Config.rootDirectory);
+                    Check(versionXML, GlobalData.config.config_Create.rootDirectory);
                     SaveFiles();
                 });
                 t.Start();
@@ -138,8 +137,8 @@ namespace SupportTools.Follow
             else
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.InitialDirectory = GlobalData.config.p1_Config.rootDirectory + "/Config";
-                if (!GlobalData.config.p1_Config.isEncrypt)
+                sfd.InitialDirectory = GlobalData.config.config_Create.rootDirectory + "/Config";
+                if (!GlobalData.config.config_Create.isEncrypt)
                 {
                     sfd.Filter = "XML文件(*.xml)|*.xml";
                     sfd.FileName = "Version-C.xml";
@@ -190,51 +189,54 @@ namespace SupportTools.Follow
         /// <summary>
         /// 把文本框的值赋给变量
         /// </summary>
-        private void GetTextBoxValue()
+        public override void SaveConfig()
         {
             var v = prefix_tbx.Text.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
             if (v.Length == 0)
             {
-                GlobalData.config.p1_Config.ftpAddress = versionXML.x_FTPAddress = new string[1] { prefix_tbx.Text };
+                GlobalData.config.config_Create.ftpAddress = versionXML.x_FTPAddress = new string[1] { prefix_tbx.Text };
             }
             else
             {
-                GlobalData.config.p1_Config.ftpAddress = versionXML.x_FTPAddress = v;
+                GlobalData.config.config_Create.ftpAddress = versionXML.x_FTPAddress = v;
             }
 
-            GlobalData.config.p1_Config.rootDirectory = root_tbx.Text;
-            GlobalData.config.p1_Config.runClient = delpro_tbx.Text;
-            GlobalData.config.p1_Config.configDirectory = config_tbx.Text;
+            GlobalData.config.config_Create.rootDirectory = root_tbx.Text;
+            GlobalData.config.config_Create.runClient = delpro_tbx.Text;
+            GlobalData.config.config_Create.configDirectory = config_tbx.Text;
 
-            GlobalData.config.p1_Config.ftpUsername = versionXML.x_FtpAccount.Username = ftpAcc_tbx.Text;
-            GlobalData.config.p1_Config.ftpPassword = versionXML.x_FtpAccount.Password = p1ftpPass_tbx.Text;
+            GlobalData.config.config_Create.ftpUsername = versionXML.x_FtpAccount.Username = ftpAcc_tbx.Text;
+            GlobalData.config.config_Create.ftpPassword = versionXML.x_FtpAccount.Password = p1ftpPass_tbx.Text;
 
-            GlobalData.config.p1_Config.Kills = versionXML.x_KillProcessNames = killname_rt.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            GlobalData.config.config_Create.Kills = versionXML.x_KillProcessNames = killname_rt.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-            GlobalData.config.p1_Config.isEncrypt = lock_cb.Checked;
+            GlobalData.config.config_Create.isEncrypt = lock_cb.Checked;
+
+
+            Utility.SaveOrOpenConfig(false);
         }
         /// <summary>
         /// 打开软件时，把以前的值直接赋给TextBox
         /// </summary>
-        private void SetTextBoxValue()
+        public override void LoadConfig()
         {
             prefix_tbx.Text = "";
-            foreach (var item in GlobalData.config.p1_Config.ftpAddress)
+            foreach (var item in GlobalData.config.config_Create.ftpAddress)
             {
                 prefix_tbx.Text += (item + ";");
             }
-            root_tbx.Text = GlobalData.config.p1_Config.rootDirectory;
-            delpro_tbx.Text = GlobalData.config.p1_Config.runClient;
-            config_tbx.Text = GlobalData.config.p1_Config.configDirectory;
-            ftpAcc_tbx.Text = GlobalData.config.p1_Config.ftpUsername;
-            p1ftpPass_tbx.Text = GlobalData.config.p1_Config.ftpPassword;
+            root_tbx.Text = GlobalData.config.config_Create.rootDirectory;
+            delpro_tbx.Text = GlobalData.config.config_Create.runClient;
+            config_tbx.Text = GlobalData.config.config_Create.configDirectory;
+            ftpAcc_tbx.Text = GlobalData.config.config_Create.ftpUsername;
+            p1ftpPass_tbx.Text = GlobalData.config.config_Create.ftpPassword;
 
             killname_rt.Clear();
-            foreach (var item in GlobalData.config.p1_Config.Kills)
+            foreach (var item in GlobalData.config.config_Create.Kills)
             {
                 killname_rt.AppendText(item + "\n");
             }
-            lock_cb.Checked = GlobalData.config.p1_Config.isEncrypt;
+            lock_cb.Checked = GlobalData.config.config_Create.isEncrypt;
         }
         /// <summary>
         /// 点击选择程序根目录按钮
@@ -246,10 +248,25 @@ namespace SupportTools.Follow
                 FolderBrowserDialog FBD = new FolderBrowserDialog();
                 if (FBD.ShowDialog() == DialogResult.OK)
                 {
-                    root_tbx.Text = GlobalData.config.p1_Config.rootDirectory = FBD.SelectedPath;
+                    root_tbx.Text = GlobalData.config.config_Create.rootDirectory = FBD.SelectedPath;
                     delpro_tbx.Text = Path.Combine(FBD.SelectedPath,"Base\\UI2.0.exe");
                     config_tbx.Text = Path.Combine(FBD.SelectedPath, "Config\\Version-C.config");
                 }
+            };
+            root_tbx.DragEnter += (d, z) =>
+            {
+                if (z.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    z.Effect = DragDropEffects.Link;
+                }
+                else
+                {
+                    z.Effect = DragDropEffects.None;
+                }
+            };
+            root_tbx.DragDrop += (d, z) =>
+            {
+                root_tbx.Text = ((System.Array)z.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
             };
         }
         /// <summary>
@@ -263,7 +280,7 @@ namespace SupportTools.Follow
                 FBD.InitialDirectory = root_tbx.Text;
                 if (FBD.ShowDialog() == DialogResult.OK)
                 {
-                    delpro_tbx.Text = GlobalData.config.p1_Config.rootDirectory = FBD.FileName;
+                    delpro_tbx.Text = GlobalData.config.config_Create.rootDirectory = FBD.FileName;
                 }
             };
         }
@@ -278,7 +295,7 @@ namespace SupportTools.Follow
                 FBD.InitialDirectory = root_tbx.Text;
                 if (FBD.ShowDialog() == DialogResult.OK)
                 {
-                    config_tbx.Text = GlobalData.config.p1_Config.rootDirectory;
+                    config_tbx.Text = GlobalData.config.config_Create.rootDirectory;
                 }
             };
         }
@@ -336,7 +353,7 @@ namespace SupportTools.Follow
 
         private void GetFiles(XMLFileList xml, DirectoryInfo dir, string replaceFolder)
         {
-            var rootFolder = new DirectoryInfo(GlobalData.config.p1_Config.rootDirectory).Name;
+            var rootFolder = new DirectoryInfo(GlobalData.config.config_Create.rootDirectory).Name;
             foreach (var item in dir.GetFiles())
             {
                 RunDoShowCheckInfo("检测文件:" + item.Name + "\n");
@@ -345,6 +362,7 @@ namespace SupportTools.Follow
                 fileinfo.Name = item.Name;
                 RunDoShowCheckInfo("计算Hash值..\n");
                 fileinfo.Hash = Utility.GetMD5Value(item.FullName);
+                RunDoShowCheckInfo("Hash值：" + fileinfo.Hash + "\n");
                 var oP = rootFolder + item.FullName.Split(new string[] { rootFolder }, StringSplitOptions.RemoveEmptyEntries)[1];
                 fileinfo.Address = oP;
                 fileinfo.InstallPath = oP.Replace(replaceFolder, "");
@@ -388,6 +406,13 @@ namespace SupportTools.Follow
             }
         }
 
+
         #endregion
+
+
+        public override void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
