@@ -117,6 +117,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.o_showinfo_rtb = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -913,6 +914,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.o_showinfo_rtb);
             this.tabPage5.Controls.Add(this.o_scan_btn);
             this.tabPage5.Controls.Add(this.label7);
             this.tabPage5.Controls.Add(this.o_clear_btn);
@@ -1011,6 +1013,14 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // o_showinfo_rtb
+            // 
+            this.o_showinfo_rtb.Location = new System.Drawing.Point(11, 135);
+            this.o_showinfo_rtb.Name = "o_showinfo_rtb";
+            this.o_showinfo_rtb.Size = new System.Drawing.Size(612, 273);
+            this.o_showinfo_rtb.TabIndex = 7;
+            this.o_showinfo_rtb.Text = "";
             // 
             // Form1
             // 
@@ -1141,6 +1151,7 @@
         private System.Windows.Forms.Button o_clear_btn;
         private System.Windows.Forms.TextBox o_xmlpath_tbx;
         private System.Windows.Forms.Button o_scan_btn;
+        private System.Windows.Forms.RichTextBox o_showinfo_rtb;
     }
 }
 

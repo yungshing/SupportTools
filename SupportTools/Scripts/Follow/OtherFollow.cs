@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 namespace SupportTools.Follow
 {
@@ -15,6 +16,8 @@ namespace SupportTools.Follow
         public Button o_checkhash_btn;
         public Button o_clear_btn;
         public Button o_scan_btn;
+
+        public RichTextBox o_showinfo_rtb;
 
         public override void Dispose()
         {
@@ -33,6 +36,8 @@ namespace SupportTools.Follow
             O_checkhash_btn_Click();
             O_clear_btn_Click();
             O_scan_btn_Click();
+
+            SetDoShowCheckInfo(DoShowCheckInfo);
         }
 
         public override void SaveConfig()
@@ -94,7 +99,18 @@ namespace SupportTools.Follow
         {
             o_clear_btn.Click += (d, z) =>
               {
-
+                  if (Directory.Exists(o_xmlpath_tbx.Text))
+                  {
+                      Thread t = new Thread(()=>
+                      {
+                          var dir = new DirectoryInfo(o_xmlpath_tbx.Text);
+                          int count = 0;
+                          ClearIFrame(dir, ref count);
+                          RunDoShowCheckInfo("修改文件完成\n");
+                          RunDoShowCheckInfo("共计修改" + count.ToString() + "个文件\n");
+                      });
+                      t.Start();
+                  }
               };
         }
 
@@ -102,8 +118,87 @@ namespace SupportTools.Follow
         {
             o_scan_btn.Click += (d, z) =>
               {
-
+                  FolderBrowserDialog f = new FolderBrowserDialog();
+                  if (f.ShowDialog()== DialogResult.OK)
+                  {
+                      o_xmlpath_tbx.Text = f.SelectedPath;
+                  }
               };
         }
+        /// <summary>
+        /// 清除xml文件中追加的IFrame节点
+        /// </summary>
+        void ClearIFrame(DirectoryInfo d,ref int count)
+        {
+            foreach (var item in d.GetFiles())
+            {
+                if (item.FullName.ToLower().EndsWith(".xml"))
+                {
+                    var list = new List<string>();
+                    bool needEditor = false;
+                    using (var sr = new StreamReader(item.FullName))
+                    {
+                        var txt = sr.ReadLine();
+                        while(txt != null)
+                        {
+                            if (txt.Contains("Photo.scr"))
+                            {
+                                needEditor = true;
+                                count++;
+                                break;
+                            }
+                            else
+                            {
+                                list.Add(txt);
+                            }
+                            txt = sr.ReadLine();
+                        }
+                    }
+                    if (needEditor)
+                    {
+                        RunDoShowCheckInfo("修改文件：" + item.Name);
+                        File.Delete(item .FullName);
+                        using (var sw = new StreamWriter(item.FullName))
+                        {
+                            foreach (var item1 in list)
+                            {
+                                sw.WriteLine(item1);
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var item in d.GetDirectories())
+            {
+                ClearIFrame(item,ref count);
+            }
+        }
+
+        #region UI Event
+        private Action<string> doShowCheckInfo;
+
+        private void RunDoShowCheckInfo(string s)
+        {
+            doShowCheckInfo?.Invoke(s);
+        }
+        private void SetDoShowCheckInfo(Action<string> a)
+        {
+            doShowCheckInfo = a;
+        }
+        private void DoShowCheckInfo(string s)
+        {
+            if (o_showinfo_rtb.InvokeRequired)
+            {
+                o_showinfo_rtb.Invoke(new Action<string>(DoShowCheckInfo), s);
+            }
+            else
+            {
+                o_showinfo_rtb.AppendText(s);
+                o_showinfo_rtb.Select(o_showinfo_rtb.TextLength, 0);
+                o_showinfo_rtb.ScrollToCaret();
+            }
+        }
+        #endregion
     }
 }

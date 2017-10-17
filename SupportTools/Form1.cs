@@ -122,7 +122,9 @@ namespace SupportTools
 
             follow.o_checkhash_btn = o_checkhash_btn;
             follow.o_clear_btn = o_clear_btn;
-            follow.o_xmlpath_tbx = o_xmlpath_tbx;
+            follow.o_scan_btn = o_scan_btn;
+
+            follow.o_showinfo_rtb = o_showinfo_rtb;
 
             follow.OnLoad();
         }
