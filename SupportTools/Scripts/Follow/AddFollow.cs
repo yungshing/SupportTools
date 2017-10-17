@@ -162,6 +162,7 @@ namespace SupportTools.Follow
             catch
             {
                 p2con_tbx.Text = "";
+                p2ftpadd_tbx.Text = "";
                 MessageBox.Show("所选文件不能被识别");
             }
         }
@@ -206,6 +207,7 @@ namespace SupportTools.Follow
             foreach (var item in r.GetDirectories())
             {
                 var c = new CheckBox();
+                c.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
                 c.Text = item.Name;
                 c.CheckedChanged += (d, z) =>
                   {
@@ -254,11 +256,11 @@ namespace SupportTools.Follow
             }
             if (haveOther)
             {
-                RunDoShowInfo("检测Ohter文件夹");
-                string folder = "Ohter";
+                RunDoShowInfo("检测Other文件夹");
+                string folder = "Other";
                 var d = new DirectoryInfo(Path.Combine(root, folder));
                 versionXML.x_FileList.x_other.Files.Clear();
-                GetFiles(versionXML.x_FileList.x_base, d, folder);
+                GetFiles(versionXML.x_FileList.x_other, d, folder);
                 RunDoShowInfo("更新Ohter文件夹......完成!");
             }
             if (changeChildFolders.Count > 0)

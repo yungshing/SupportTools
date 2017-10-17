@@ -107,6 +107,7 @@
             this.code_source_tbx = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.o_showinfo_rtb = new System.Windows.Forms.RichTextBox();
             this.o_scan_btn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.o_clear_btn = new System.Windows.Forms.Button();
@@ -117,7 +118,6 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.o_showinfo_rtb = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -929,6 +929,14 @@
             this.tabPage5.Text = "其它";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // o_showinfo_rtb
+            // 
+            this.o_showinfo_rtb.Location = new System.Drawing.Point(11, 135);
+            this.o_showinfo_rtb.Name = "o_showinfo_rtb";
+            this.o_showinfo_rtb.Size = new System.Drawing.Size(612, 273);
+            this.o_showinfo_rtb.TabIndex = 7;
+            this.o_showinfo_rtb.Text = "";
+            // 
             // o_scan_btn
             // 
             this.o_scan_btn.Location = new System.Drawing.Point(549, 105);
@@ -1013,14 +1021,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // o_showinfo_rtb
-            // 
-            this.o_showinfo_rtb.Location = new System.Drawing.Point(11, 135);
-            this.o_showinfo_rtb.Name = "o_showinfo_rtb";
-            this.o_showinfo_rtb.Size = new System.Drawing.Size(612, 273);
-            this.o_showinfo_rtb.TabIndex = 7;
-            this.o_showinfo_rtb.Text = "";
             // 
             // Form1
             // 
