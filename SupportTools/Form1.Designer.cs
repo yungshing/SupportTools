@@ -118,6 +118,8 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.c_showinfo_pb = new System.Windows.Forms.ProgressBar();
+            this.c_percent_lab = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -154,7 +156,7 @@
             // 
             // star_btn
             // 
-            this.star_btn.Location = new System.Drawing.Point(419, 154);
+            this.star_btn.Location = new System.Drawing.Point(461, 154);
             this.star_btn.Name = "star_btn";
             this.star_btn.Size = new System.Drawing.Size(69, 23);
             this.star_btn.TabIndex = 5;
@@ -181,10 +183,10 @@
             // 
             // showTip_ri
             // 
-            this.showTip_ri.Location = new System.Drawing.Point(3, 154);
+            this.showTip_ri.Location = new System.Drawing.Point(3, 162);
             this.showTip_ri.Name = "showTip_ri";
             this.showTip_ri.ReadOnly = true;
-            this.showTip_ri.Size = new System.Drawing.Size(410, 261);
+            this.showTip_ri.Size = new System.Drawing.Size(410, 253);
             this.showTip_ri.TabIndex = 9;
             this.showTip_ri.Text = "";
             // 
@@ -213,6 +215,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.c_percent_lab);
+            this.tabPage1.Controls.Add(this.c_showinfo_pb);
             this.tabPage1.Controls.Add(this.p1add_btn);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
@@ -239,7 +243,7 @@
             // 
             // p1add_btn
             // 
-            this.p1add_btn.Location = new System.Drawing.Point(501, 154);
+            this.p1add_btn.Location = new System.Drawing.Point(559, 154);
             this.p1add_btn.Name = "p1add_btn";
             this.p1add_btn.Size = new System.Drawing.Size(69, 23);
             this.p1add_btn.TabIndex = 23;
@@ -1022,6 +1026,22 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // c_showinfo_pb
+            // 
+            this.c_showinfo_pb.Location = new System.Drawing.Point(3, 146);
+            this.c_showinfo_pb.Name = "c_showinfo_pb";
+            this.c_showinfo_pb.Size = new System.Drawing.Size(371, 10);
+            this.c_showinfo_pb.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.c_showinfo_pb.TabIndex = 24;
+            // 
+            // c_percent_lab
+            // 
+            this.c_percent_lab.AutoSize = true;
+            this.c_percent_lab.Location = new System.Drawing.Point(380, 145);
+            this.c_percent_lab.Name = "c_percent_lab";
+            this.c_percent_lab.Size = new System.Drawing.Size(0, 12);
+            this.c_percent_lab.TabIndex = 25;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1152,6 +1172,8 @@
         private System.Windows.Forms.TextBox o_xmlpath_tbx;
         private System.Windows.Forms.Button o_scan_btn;
         private System.Windows.Forms.RichTextBox o_showinfo_rtb;
+        private System.Windows.Forms.Label c_percent_lab;
+        private System.Windows.Forms.ProgressBar c_showinfo_pb;
     }
 }
 

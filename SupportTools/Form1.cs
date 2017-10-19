@@ -17,6 +17,7 @@ namespace SupportTools
             InitializeComponent();
             LoadConfig();
             InitializeFollow();
+            this.FormClosing += FormClose;
         }
 
         void InitializeFollow()
@@ -40,7 +41,7 @@ namespace SupportTools
         /// </summary>
         void Create()
         {
-            var f = new Follow.MadeConfigFollow();
+            var f = new MadeConfigFollow();
 
             f.form = this;
 
@@ -62,6 +63,10 @@ namespace SupportTools
             f.showTip_ri = showTip_ri;
 
             f.lock_cb = lock_cb;
+
+            f.c_showinfo_pb = c_showinfo_pb;
+
+            f.c_percent_lab = c_percent_lab;
 
             f.OnLoad();
         }
@@ -127,6 +132,11 @@ namespace SupportTools
             follow.o_showinfo_rtb = o_showinfo_rtb;
 
             follow.OnLoad();
+        }
+      
+        private void FormClose(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

@@ -70,7 +70,8 @@ namespace SupportTools.Follow
         /// FTP 密码 TextBox
         /// </summary>
         public TextBox p1ftpPass_tbx;
-
+        public ProgressBar c_showinfo_pb;
+        public Label c_percent_lab;
         /// <summary>
         /// 是否正在检测文件
         /// 防止在检测文件的同时，用户更新其他信息
@@ -78,7 +79,14 @@ namespace SupportTools.Follow
         private bool isChecking = false;
         private VersionXML versionXML;
         private bool isOnLoad = false;
-
+        /// <summary>
+        /// 进度条值
+        /// </summary>
+        private int pvalue = 0;
+        /// <summary>
+        /// 进度条最大值 
+        /// </summary>
+        private int pmax = 0;
         public MadeConfigFollow()
         {
             isOnLoad = false;
@@ -102,6 +110,8 @@ namespace SupportTools.Follow
             OnClickStart();
             LoadConfig();
             SetDoShowCheckInfo(DoShowCheckInfo);
+            SetDoShowProgressBar(DoShowProgressBar);
+            SetShowPercent(DoShowPercent);
         }
         /// <summary>
         /// 点击开始
@@ -119,6 +129,7 @@ namespace SupportTools.Follow
                 SaveConfig();
                 Thread t = new Thread(()=>
                 {
+                    versionXML = new VersionXML();
                     Check(versionXML, GlobalData.config.config_Create.rootDirectory);
                     SaveFiles();
                 });
@@ -324,6 +335,9 @@ namespace SupportTools.Follow
         #region 检测文件事件
         private void Check(VersionXML xml,string rootPath)
         {
+            pmax = Directory.GetFiles(Path.Combine(rootPath,"Base"),"*",SearchOption.AllDirectories).Length;
+            pmax += Directory.GetFiles(Path.Combine(rootPath, "Other"), "*", SearchOption.AllDirectories).Length;
+            pmax += Directory.GetFiles(Path.Combine(rootPath, "Change"), "*", SearchOption.AllDirectories).Length;
             var D = new DirectoryInfo(rootPath);
             foreach (var item in D.GetDirectories())
             {
@@ -354,8 +368,11 @@ namespace SupportTools.Follow
         private void GetFiles(XMLFileList xml, DirectoryInfo dir, string replaceFolder)
         {
             var rootFolder = new DirectoryInfo(GlobalData.config.config_Create.rootDirectory).Name;
-            foreach (var item in dir.GetFiles())
+            foreach (var item1 in Directory.GetFiles(dir.FullName, "*", SearchOption.AllDirectories))
             {
+                RunDoShowProgressBar(++pvalue,pmax);
+                RunDoShowPercent((pvalue / (float)pmax).ToString("0%"));
+                var item = new FileInfo(item1);
                 RunDoShowCheckInfo("检测文件:" + item.Name + "\n");
                 var fileinfo = new XMLFileInfo();
                 var file = new FileInfo(item.FullName);
@@ -373,17 +390,16 @@ namespace SupportTools.Follow
                 }
                 xml.Files.Add(fileinfo);
             }
-            foreach (var item in dir.GetDirectories())
-            {
-                RunDoShowCheckInfo("进入目录:" + item.FullName + "\n");
-                GetFiles(xml, item, replaceFolder);
-            }
+            //foreach (var item in dir.GetDirectories())
+            //{
+            //    RunDoShowCheckInfo("进入目录:" + item.FullName + "\n");
+            //    GetFiles(xml, item, replaceFolder);
+            //}
         }
         #endregion
 
         #region UI事件
         private Action<string> doShowCheckInfo;
-
         private void RunDoShowCheckInfo(string s)
         {
             doShowCheckInfo?.Invoke(s);
@@ -406,7 +422,51 @@ namespace SupportTools.Follow
             }
         }
 
+        private Action<int, int> doShowProgressBar;
+        private void RunDoShowProgressBar(int i,int max)
+        {
+            if (i <= max)
+            {
+                doShowProgressBar?.Invoke(i, max);
+            }
+        }
+        private void SetDoShowProgressBar(Action<int,int> a)
+        {
+            doShowProgressBar = a;
+        }
+        private void DoShowProgressBar(int value,int max)
+        {
+            if (c_showinfo_pb.InvokeRequired)
+            {
+                c_showinfo_pb.Invoke(new Action<int,int>(DoShowProgressBar),new object[] { value,max});
+            }
+            else
+            {
+                c_showinfo_pb.Maximum = max;
+                c_showinfo_pb.Value = value;
+            }
+        }
 
+        private Action<string> doShowPercent;
+        private void RunDoShowPercent(string s)
+        {
+            doShowPercent?.Invoke(s);
+        }
+        private void SetShowPercent(Action<string> a)
+        {
+            doShowPercent = a;
+        }
+        private void DoShowPercent(string s)
+        {
+            if (c_percent_lab.InvokeRequired)
+            {
+                c_percent_lab.Invoke(new Action<string>(DoShowPercent), s);
+            }
+            else
+            {
+                c_percent_lab.Text = s;
+            }
+        }
         #endregion
 
 

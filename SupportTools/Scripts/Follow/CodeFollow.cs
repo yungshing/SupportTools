@@ -38,7 +38,7 @@ namespace SupportTools.Follow
             code_source_tbx.DragEnter += (d, z) =>
             {
                 var n = ((System.Array)z.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-                if (n.EndsWith(".config"))
+                if (n.EndsWith(".config") || n.EndsWith(".xml"))
                 {
                     z.Effect = DragDropEffects.Link;
                 }
@@ -46,7 +46,7 @@ namespace SupportTools.Follow
             code_source_tbx.DragDrop += (d, z) =>
             {
                 var n = ((System.Array)z.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-                if (n.EndsWith(".config"))
+                if (n.EndsWith(".config") || n.EndsWith(".xml"))
                 {
                     code_source_tbx.Text = n;
                 }
